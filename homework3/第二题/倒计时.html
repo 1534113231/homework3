@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Countdown to NCEE</title>
+        <link rel="stylesheet" href="倒计时.css">
+    </head>
+    <body>
+        <div class="container">
+             <h2><span>Countdown to NCEE</span> 2021</h2>
+             <div class="countdown">
+                 <div id="day">NA</div>
+                 <div id="hour">NA</div>
+                 <div id="minute">NA</div>
+                 <div id="second">NA</div>
+             </div>
+         </div>
+
+    </body>
+</html>
+<script type="text/javascript">
+
+function getEndTime(myYear) {
+  var myEndTime = new Date("" + myYear + "/06/07 00:00:00");// 创建Date对象，确定相关时间
+  return myEndTime;
+}
+
+function countDown() {
+  var mydate = new Date();
+  var year = "2023";
+  var EndTime = getEndTime(year);
+  var NowTime = new Date();
+  if (EndTime.getTime() - NowTime.getTime() < 0) {
+    year = mydate.getFullYear() + 1;// 获取最新的时间，自动切换至下一次高考时间，避免出现负数
+    EndTime = getEndTime(year);// 重新获取高考时间
+  } 
+  var t = EndTime.getTime() - NowTime.getTime();
+  // 此处结果为毫秒，需要进一步转化
+  var d = Math.floor(t / 1000 / 60 / 60 / 24);// 向下取整
+  var h = Math.floor((t / 1000 / 60 / 60) % 24);
+  var m = Math.floor((t / 1000 / 60) % 60);
+  var s = Math.floor((t / 1000) % 60);
+  // 渲染结果至页面
+  document.getElementById("day").innerText = d;
+  document.getElementById("hour").innerText = h;
+  document.getElementById("minute").innerText = m;
+  document.getElementById("second").innerText = s;
+}
+setInterval(countDown, 1000);// 设置一个间隔1s就触发上述函数的计时器，达到实时更新的作用
+</script>
+
